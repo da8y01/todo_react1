@@ -1,0 +1,14 @@
+# ReactJS ToDo example, step by step.
+
+## Links
+* Getting Started with Redux: https://egghead.io/series/getting-started-with-redux
+* Setting up React for ES6 with Webpack and Babel: https://www.twilio.com/blog/2015/08/setting-up-react-for-es6-with-webpack-and-babel-2.html
+
+## Steps
+* Make a working directory: `mkdir todo_steps1`
+* Enter to the working directory: `cd todo_steps1`
+* Initialize git CVS: `git init`
+
+
+## Commands
+* Launch: `webpack-dev-server --progress --colors`
