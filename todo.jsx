@@ -54,20 +54,21 @@ class Todo extends React.Component {
   render() {
     return (
       <div>
+        <input ref={node => {this.input = node;}} />
         <button 
           onClick={() => {
             store.dispatch({
               type: 'ADD_TODO',
-              text: 'test',
+              text: this.input.value,
               id: nextTodoId++
             });
+            this.input.value = '';
           }}
         >
         Add ToDo
         </button>
         <ul>
-          <li>first</li>
-          <li>last</li>
+          {this. props.todos.map(todo => <li key={todo.id}>{todo.text}</li>)}
         </ul>
       </div>
     );
