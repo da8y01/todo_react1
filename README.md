@@ -8,6 +8,13 @@
 * Make a working directory: `mkdir todo_steps1`
 * Enter to the working directory: `cd todo_steps1`
 * Initialize git CVS: `git init`
+* Initialize NPM: `npm init`
+* Install the NPM required libs.
+* Setup the Webpack configuration, and implement a first tiny react Todo component to test the configuration.
+* Implement the Todo react component using Redux methods, add reducers, and update the UI component.
+* Implement the dynamically passed to the react component list of state ToDos.
+* Implement the ToDo toggling dispatching an action on the list item.
+* In the view list, make the list item cross-lined.
 
 
 ## Commands
