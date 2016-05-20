@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { combineReducers } from 'redux';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
 
 const todo = (state, action) => {
@@ -182,26 +184,20 @@ const getVisibleTodos = (
   }
 };
 
-class VisibleTodoList extends React.Component {
-  componentDidMount() {
-    this.unsubscribe = store.subscribe(() => this.forceUpdate());
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const props = this.props;
-    const state = store.getState();
-
-    return (
-      <TodoList 
-        todos={getVisibleTodos(state.todos, state.visibilityFilter)} 
-        onTodoClick={id => store.dispatch({type: 'TOGGLE_TODO', id})} />
-    );
-  }
-}
+const mapStateToTodoListProps = (state) => {
+  return {
+    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+  };
+};
+const mapDispatchToTodoListProps = (dispatch) => {
+  return {
+    onTodoClick: (id) => {dispatch({type: 'TOGGLE_TODO', id})}
+  };
+};
+const VisibleTodoList = connect(
+  mapStateToTodoListProps, 
+  mapDispatchToTodoListProps
+)(TodoList);
 
 
 const TodoApp = () => (
@@ -219,8 +215,9 @@ const todoApp = combineReducers({
 });
 
 const store = createStore(todoApp);
-
 ReactDOM.render(
-  <TodoApp />, 
+  <Provider store={store}>
+    <TodoApp />
+  </Provider>, 
   document.getElementById('root')
 );
