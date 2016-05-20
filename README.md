@@ -21,6 +21,9 @@
 * Use the newly created `FilterLink` component in the `TodoApp` component.
 * Refactor, extract presentational components.
 * Create `Todo` and `TodoList` components, and use they in `TodoApp` component.
+* Refactor, extract input and button in `AddTodo`.
+* Refactor, extract filter bottom in `Footer`.
+* Use `AddTodo` and `Footer` in `TodoApp` *container*.
 
 
 ## Commands
