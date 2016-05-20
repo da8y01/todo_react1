@@ -29,8 +29,18 @@
 * Refactor, extract container components from the top level container component.
 * Implement a `VisibleTodoList` container that connects the `TodoList` with the Redux store.
 * Refactor and implements `VisibleTodoList` container using `connect()` react-redux function.
-* Refactor and implements `FilterLink` container using `connect()` react-redux function.
+* Refactor and implements `AddTodo` and `FilterLink` containers using `connect()` react-redux function.
+* Separates and implements action creators functions.
 
 
 ## Commands
 * Launch: `webpack-dev-server --progress --colors`
+
+
+### About containers, and why add Provider
+The top level variable store refers to the Redux store, and the components use the services it provides; this doesn't scale very well for real applications:
+* All the containers are referencing a specific store.
+* Hard to implement "universal" applications, because on the server, the app needs to provide a different store instance for every request.
+
+### About *Action Creators*
+Maybe you can think this code is a waste, but don't underestimate the *action creators* as useful project documentation because they tell what kind of actions the components can dispatch, and this kind of information is invaluable in larger applications.
