@@ -26,6 +26,8 @@
 * Use `AddTodo` and `Footer` in `TodoApp` *container*.
 * Refactor `TodoApp` to be a function with a single expression.
 * Refactor, implement a *container* `FilterLink` for a `Link` presentational/visual component.
+* Refactor, extract container components from the top level container component.
+* Implement a `VisibleTodoList` container that connects the `TodoList` with the Redux store.
 
 
 ## Commands
