@@ -28,6 +28,8 @@
 * Refactor, implement a *container* `FilterLink` for a `Link` presentational/visual component.
 * Refactor, extract container components from the top level container component.
 * Implement a `VisibleTodoList` container that connects the `TodoList` with the Redux store.
+* Refactor and implements `VisibleTodoList` container using `connect()` react-redux function.
+* Refactor and implements `FilterLink` container using `connect()` react-redux function.
 
 
 ## Commands
