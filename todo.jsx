@@ -48,13 +48,12 @@ const visibilityFilter = (
   }
 };
 
-const FilterLink = ({
-  filter, 
-  currentFilter, 
+const Link = ({
+  active, 
   children, 
   onClick
 }) => {
-  if (filter === currentFilter) {
+  if (active) {
     return <span>{children}</span>;
   }
 
@@ -63,7 +62,7 @@ const FilterLink = ({
       href="#" 
       onClick={e => {
         e.preventDefault();
-        onClick(filter);
+        onClick();
       }}
     >
       {children}
@@ -122,6 +121,33 @@ const AddTodo = ({
   );
 };
 
+class FilterLink extends React.Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => this.forceUpdate());
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    const props = this.props;
+    const state = store.getState();
+
+    return (
+      <Link 
+        active={props.filter === state.visibilityFilter} 
+        onClick={() => store.dispatch({
+          type: 'SET_VISIBILITY_FILTER', 
+          filter: props.filter
+        })}
+      >
+        {props.children}
+      </Link>
+    );
+  }
+}
+
 const Footer = ({
   visibilityFilter, 
   onFilterClick
@@ -129,27 +155,15 @@ const Footer = ({
   <p>
     Show:
     {' '}
-    <FilterLink 
-      filter='SHOW_ALL' 
-      currentFilter={visibilityFilter} 
-      onClick={onFilterClick}
-    >
+    <FilterLink filter='SHOW_ALL'>
       All
     </FilterLink>
     {', '}
-    <FilterLink 
-      filter='SHOW_ACTIVE' 
-      currentFilter={visibilityFilter} 
-      onClick={onFilterClick}
-    >
+    <FilterLink filter='SHOW_ACTIVE'>
       Active
     </FilterLink>
     {', '}
-    <FilterLink 
-      filter='SHOW_COMPLETED' 
-      currentFilter={visibilityFilter} 
-      onClick={onFilterClick}
-    >
+    <FilterLink filter='SHOW_COMPLETED'>
       Completed
     </FilterLink>
   </p>
@@ -184,12 +198,7 @@ const TodoApp = ({
     <TodoList 
       todos={getVisibleTodos(todos, visibilityFilter)} 
       onTodoClick={id => store.dispatch({type: 'TOGGLE_TODO', id})} />
-    <Footer 
-      visibilityFilter={visibilityFilter} 
-      onFilterClick={filter => store.dispatch({
-        type: 'SET_VISIBILITY_FILTER', 
-        filter
-      })} />
+    <Footer />
   </div>
 );
 
@@ -203,7 +212,7 @@ const store = createStore(todoApp);
 
 const render = () => {
   ReactDOM.render(
-    <TodoApp {...store.getState()} />,
+    <TodoApp {...store.getState()} />, 
     document.getElementById('root')
   );
 };

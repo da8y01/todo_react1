@@ -25,6 +25,7 @@
 * Refactor, extract filter bottom in `Footer`.
 * Use `AddTodo` and `Footer` in `TodoApp` *container*.
 * Refactor `TodoApp` to be a function with a single expression.
+* Refactor, implement a *container* `FilterLink` for a `Link` presentational/visual component.
 
 
 ## Commands
