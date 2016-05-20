@@ -24,6 +24,7 @@
 * Refactor, extract input and button in `AddTodo`.
 * Refactor, extract filter bottom in `Footer`.
 * Use `AddTodo` and `Footer` in `TodoApp` *container*.
+* Refactor `TodoApp` to be a function with a single expression.
 
 
 ## Commands

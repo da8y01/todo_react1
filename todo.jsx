@@ -171,36 +171,27 @@ const getVisibleTodos = (
 
 
 let nextTodoId = 0;
-class TodoApp extends React.Component {
-  render() {
-    const {
-      todos, 
-      visibilityFilter
-    } = this.props;
-    const visibleTodos = getVisibleTodos(
-      todos, 
-      visibilityFilter
-    );
-    return (
-      <div>
-        <AddTodo onAddClick={text => store.dispatch({
-          type: 'ADD_TODO', 
-          id: nextTodoId++, 
-          text
-        })} />
-        <TodoList 
-          todos={visibleTodos} 
-          onTodoClick={id => store.dispatch({type: 'TOGGLE_TODO', id})} />
-        <Footer 
-          visibilityFilter={visibilityFilter} 
-          onFilterClick={filter => store.dispatch({
-            type: 'SET_VISIBILITY_FILTER', 
-            filter
-          })} />
-      </div>
-    );
-  }
-}
+const TodoApp = ({
+  todos, 
+  visibilityFilter
+}) => (
+  <div>
+    <AddTodo onAddClick={text => store.dispatch({
+      type: 'ADD_TODO', 
+      id: nextTodoId++, 
+      text
+    })} />
+    <TodoList 
+      todos={getVisibleTodos(todos, visibilityFilter)} 
+      onTodoClick={id => store.dispatch({type: 'TOGGLE_TODO', id})} />
+    <Footer 
+      visibilityFilter={visibilityFilter} 
+      onFilterClick={filter => store.dispatch({
+        type: 'SET_VISIBILITY_FILTER', 
+        filter
+      })} />
+  </div>
+);
 
 
 const todoApp = combineReducers({
